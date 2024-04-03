@@ -13,7 +13,7 @@ jobs:
     - name: Debounce 30 seconds
       uses: zachary95/github-actions-debounce@v0.1.0
       with:
-        wait: 30
+        wait: 1
 
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -28,7 +28,10 @@ jobs:
         git checkout -b dist-edit
         git rm -r . || true
         git checkout main -- '*.json'
+        git checkout origin/dist -- 'sfh-rooot.json.gz' || true
+        git checkout origin/dist -- 'sfh-yt.json.gz' || true
         find . -name "*.json" -exec gzip {} \;
         git add .
         git commit --allow-empty -m "update dist to json at $(git log --pretty=format:"%h" -n 1)"
         git push origin dist-edit:dist
+
