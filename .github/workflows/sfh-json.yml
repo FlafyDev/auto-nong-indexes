@@ -22,7 +22,7 @@ jobs:
         git checkout origin/dist
         git checkout -b dist-edit
         json="$(curl https://api.songfilehub.com/songs)"
-        echo "$json" | jq -c '[.[] | select(try(.songID | tonumber | . != null)) | {name: (.songName | if contains(" - ") then split(" - ")[1] else . end), artist: (.songName | if contains(" - ") then split(" - ")[0] else "" end), songs: [.songID | tonumber], "yt-id": .ytVideoID, source: "youtube"}]' | gzip > sfh-yt.json.gz
+        echo "$json" | jq -c '[.[] | select(try(.songID | tonumber | . != null)) | select(.songURL | contains("youtu.be") or contains("youtube.com")) | {name: (.songName | if contains(" - ") then split(" - ")[1] else . end), artist: (.songName | if contains(" - ") then split(" - ")[0] else "" end), songs: [.songID | tonumber], "yt-id": .songURL | capture("(youtu.be/|v=)(?<id>[^&?/]+)") | .id, source: "youtube"}]' | gzip > sfh-yt.json.gz
         echo "$json" | jq -c '[.[] | select(try(.songID | tonumber | . != null)) | {name: (.songName | if contains(" - ") then split(" - ")[1] else . end), artist: (.songName | if contains(" - ") then split(" - ")[0] else "" end), songs: [.songID | tonumber], url: "https://cdn-sfh.rooot.gay/\(._id).mp3", source: "host"}]' | gzip > sfh-rooot.json.gz
         git add .
         git commit --allow-empty -m "update SFH dist"
