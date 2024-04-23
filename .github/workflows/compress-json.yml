@@ -29,6 +29,7 @@ jobs:
         git rm -r . || true
         git checkout main -- '*.json'
         git checkout origin/dist -- 'sfh-rooot.json.gz' || true
+        git checkout origin/dist -- 'sfh-pingusmc.json.gz' || true
         git checkout origin/dist -- 'sfh-yt.json.gz' || true
         find . -name "*.json" -exec gzip {} \;
         git add .
