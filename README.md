@@ -3,7 +3,9 @@ My indexes for the GD Mod Auto Nong.
 
 #### Get the indexes in this repo:
 - `https://cdn.jsdelivr.net/gh/FlafyDev/auto-nong-indexes@dist/official.json.gz`
+- `https://cdn.jsdelivr.net/gh/FlafyDev/auto-nong-indexes@dist/sfh-yt.json.gz`
 - `https://cdn.jsdelivr.net/gh/FlafyDev/auto-nong-indexes@dist/sfh-rooot.json.gz`
+- `https://cdn.jsdelivr.net/gh/FlafyDev/auto-nong-indexes@dist/sfh-pingusmc.json.gz`
 
 ###### If the indexes are not up to date with the `dist` branch, use [this to update them](https://www.jsdelivr.com/tools/purge).
 
