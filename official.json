@@ -4,7 +4,9 @@
     "artist": "Crim3s",
     "source": "youtube",
     "yt-id": "VZXeoUPPFOY",
-    "songs": [945695]
+    "songs": [
+      945695
+    ]
   },
   {
     "name": "Stay Alive ( Luan & Codly Remix )",
@@ -20,13 +22,26 @@
     "artist": "Protostar",
     "yt-id": "fndMDLCYXpc",
     "source": "youtube",
-    "songs": [677070]
+    "songs": [
+      677070
+    ]
   },
   {
     "name": "Dash Destroyer (Franks Remix)",
     "artist": "Francisc0422",
     "source": "youtube",
     "yt-id": "YCNWJifANyM",
-    "songs": [1172947]
+    "songs": [
+      1172947
+    ]
+  },
+  {
+    "name": "Shiawase (VIP)",
+    "artist": "Dion Timmer",
+    "source": "youtube",
+    "yt-id": "suisIF4hwyw",
+    "songs": [
+      1266014
+    ]
   }
 ]
