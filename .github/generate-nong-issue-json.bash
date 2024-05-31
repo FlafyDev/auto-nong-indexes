@@ -1,4 +1,4 @@
-resf="${HOME}/issue-parser-result.json" # Form result file for easy access
+resf="${RUNNER_TEMP}/issue-parser-result.json" # Form result file for easy access
 
 case $(jq -r .source "$resf") in
   "Youtube")
