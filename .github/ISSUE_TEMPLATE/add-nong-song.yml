@@ -47,9 +47,17 @@ body:
     attributes:
       label: Song ID
       description: 'Which song ID should the Nong song replace in Geometry Dash? '
-      placeholder: ex. 945695
+      placeholder: Ex. 945695
     validations:
       required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Extra
+      description: Anything else you would like to add? For example, levels that use that song.
+      placeholder: Ex. Used in the level "Slaughterhouse" - 27690100
+    validations:
+      required: false
   - type: markdown
     attributes:
       value: Thanks for contributing songs!
