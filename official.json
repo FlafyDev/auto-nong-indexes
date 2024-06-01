@@ -133,5 +133,14 @@
     "songs": [
       2023
     ]
+  },
+  {
+    "name": "El Pollito Pio",
+    "artist": "Pulcino Pio",
+    "source": "youtube",
+    "yt-id": "dhsy6epaJGs",
+    "songs": [
+      1
+    ]
   }
 ]
