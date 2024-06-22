@@ -20,6 +20,11 @@ jobs:
             echo "add-nong=true" >> $GITHUB_OUTPUT 
             echo "reviewer=FlafyDev <flafyarazi@gmail.com>" >> $GITHUB_OUTPUT
           fi
+          if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "elnexreal" ]; then
+            echo "Accepting"
+            echo "add-nong=true" >> $GITHUB_OUTPUT 
+            echo "reviewer=elnexreal <40328573+elnexreal@users.noreply.github.com>" >> $GITHUB_OUTPUT
+          fi
         fi
 
   on-comment-adding-nong:
