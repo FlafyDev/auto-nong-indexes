@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       add-nong: ${{ steps.check-comment.outputs.add-nong }}
+      reviewer: ${{ steps.check-comment.outputs.reviewer }}
     steps:
     - name: Check Comment
       id: check-comment
@@ -17,6 +18,7 @@ jobs:
           if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "FlafyDev" ]; then
             echo "Accepting"
             echo "add-nong=true" >> $GITHUB_OUTPUT 
+            echo "reviewer=FlafyDev <flafyarazi@gmail.com>" >> $GITHUB_OUTPUT
           fi
         fi
 
@@ -75,6 +77,8 @@ jobs:
             official: Add ${{ steps.generate-details.outputs.song_name }} by ${{ steps.generate-details.outputs.artist_name }}
 
             fixes: #${{ github.event.issue.number }}
+
+            Reviewed-by: ${{ needs.on-comment.outputs.reviewer }}
 
       - name: Generate Token
         uses: wow-actions/use-app-token@v2
