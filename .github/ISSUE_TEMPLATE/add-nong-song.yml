@@ -50,6 +50,14 @@ body:
       placeholder: Ex. 945695
     validations:
       required: true
+  - type: input
+    id: start-offset
+    attributes:
+      label: Start Offset [ms]
+      description: What is the start offset of the song in milliseconds?
+      placeholder: Ex. 0
+    validations:
+      required: false
   - type: textarea
     id: extra
     attributes:

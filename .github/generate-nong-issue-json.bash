@@ -7,6 +7,7 @@ case $(jq -r .source "$resf") in
         name: .["song-name"],
         artist: .["artist-name"],
         source: "youtube",
+        startOffset: (.["start-offset"] // "0" | tonumber? // 0),
         "yt-id": "'"$yt_id"'",
         songs: [(.["song-id"] | tonumber)]
       }' "$resf" > result.json
@@ -17,6 +18,7 @@ case $(jq -r .source "$resf") in
         name: .["song-name"],
         artist: .["artist-name"],
         source: "host",
+        startOffset: (.["start-offset"] // "0" | tonumber? // 0),
         url: .["direct-link"],
         songs: [(.["song-id"] | tonumber)]
       }' "$resf" > result.json
