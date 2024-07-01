@@ -24,6 +24,10 @@ jobs:
           echo "authenticated=true" >> $GITHUB_OUTPUT 
           echo "reviewer=elnexreal <40328573+elnexreal@users.noreply.github.com>" >> $GITHUB_OUTPUT
         fi
+        if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "Draogn12345678" ]; then
+          echo "authenticated=true" >> $GITHUB_OUTPUT 
+          echo "reviewer=Draogn12345678 <unknown>" >> $GITHUB_OUTPUT
+        fi
 
         comment_body=$(jq -r .comment.body "$GITHUB_EVENT_PATH")
 
