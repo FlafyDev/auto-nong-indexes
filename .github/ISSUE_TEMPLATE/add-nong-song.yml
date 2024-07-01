@@ -40,7 +40,7 @@ body:
     id: direct-link
     attributes:
       label: Direct File Link
-      description: If you chose Direct file download, what is the URL of the file?
+      description: If you chose Direct file download, what is the URL of the file? Must be a link to a proper CDN, Not Google Drive, Dropbox or MediaFile.
       placeholder: Ex. https://www.example.com/song.mp3
   - type: input
     id: song-id
