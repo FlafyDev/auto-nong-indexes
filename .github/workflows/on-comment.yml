@@ -9,28 +9,58 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       add-nong: ${{ steps.check-comment.outputs.add-nong }}
+      reject: ${{ steps.check-comment.outputs.reject }}
+      authenticated: ${{ steps.check-comment.outputs.authenticated }}
       reviewer: ${{ steps.check-comment.outputs.reviewer }}
     steps:
     - name: Check Comment
       id: check-comment
       run: |
-        if [ "$(jq -r .comment.body $GITHUB_EVENT_PATH)" = "accept" ]; then
-          if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "FlafyDev" ]; then
-            echo "Accepting"
-            echo "add-nong=true" >> $GITHUB_OUTPUT 
-            echo "reviewer=FlafyDev <flafyarazi@gmail.com>" >> $GITHUB_OUTPUT
-          fi
-          if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "elnexreal" ]; then
-            echo "Accepting"
-            echo "add-nong=true" >> $GITHUB_OUTPUT 
-            echo "reviewer=elnexreal <40328573+elnexreal@users.noreply.github.com>" >> $GITHUB_OUTPUT
-          fi
+        if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "FlafyDev" ]; then
+          echo "authenticated=true" >> $GITHUB_OUTPUT 
+          echo "reviewer=FlafyDev <flafyarazi@gmail.com>" >> $GITHUB_OUTPUT
         fi
+        if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "elnexreal" ]; then
+          echo "authenticated=true" >> $GITHUB_OUTPUT 
+          echo "reviewer=elnexreal <40328573+elnexreal@users.noreply.github.com>" >> $GITHUB_OUTPUT
+        fi
+
+        comment_body=$(jq -r .comment.body "$GITHUB_EVENT_PATH")
+
+        if echo "$comment_body" | grep -q '^accept'; then
+            echo "add-nong=true" >> "$GITHUB_OUTPUT"
+        fi
+
+        if echo "$comment_body" | grep -q '^reject'; then
+            echo "reject=true" >> "$GITHUB_OUTPUT"
+        fi
+
+  on-comment-reject-nong:
+    runs-on: ubuntu-latest
+    needs: on-comment
+    if: needs.on-comment.outputs.authenticated == 'true' && needs.on-comment.outputs.reject == 'true'
+    steps:
+      - uses: ahmadnassri/action-workflow-queue@v1
+
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Generate Token
+        uses: wow-actions/use-app-token@v2
+        id: generate_token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }} 
+
+      - name: Close Issue
+        run: gh issue close ${{ github.event.issue.number }} --reason "not planned"
+        env:
+          GH_TOKEN: ${{ steps.generate_token.outputs.BOT_TOKEN }}
 
   on-comment-adding-nong:
     runs-on: ubuntu-latest
     needs: on-comment
-    if: needs.on-comment.outputs.add-nong == 'true'
+    if: needs.on-comment.outputs.authenticated == 'true' && needs.on-comment.outputs.add-nong == 'true'
     steps:
       - uses: ahmadnassri/action-workflow-queue@v1
 
