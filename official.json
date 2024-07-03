@@ -464,5 +464,15 @@
     "songs": [
       34567
     ]
+  },
+  {
+    "name": "Rush B",
+    "artist": "Sheet Music Boss",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "5zo7BYoaqAA",
+    "songs": [
+      571236
+    ]
   }
 ]
