@@ -534,5 +534,15 @@
     "songs": [
       1
     ]
+  },
+  {
+    "name": "XO",
+    "artist": "Aaron Musslewhite",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "oE8g_zbjGWg",
+    "songs": [
+      766165
+    ]
   }
 ]
