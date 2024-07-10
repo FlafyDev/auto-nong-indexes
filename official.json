@@ -594,5 +594,15 @@
     "songs": [
       2222
     ]
+  },
+  {
+    "name": "Dancing In The Dark",
+    "artist": "Joji",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "K3Qzzggn--s",
+    "songs": [
+      6
+    ]
   }
 ]
