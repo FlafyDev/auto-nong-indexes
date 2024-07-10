@@ -16,34 +16,14 @@ jobs:
     - name: Check Comment
       id: check-comment
       run: |
-        if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "FlafyDev" ]; then
-          echo "authenticated=true" >> $GITHUB_OUTPUT 
-          echo "reviewer=FlafyDev <flafyarazi@gmail.com>" >> $GITHUB_OUTPUT
-        fi
-        if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "elnexreal" ]; then
-          echo "authenticated=true" >> $GITHUB_OUTPUT 
-          echo "reviewer=elnexreal <40328573+elnexreal@users.noreply.github.com>" >> $GITHUB_OUTPUT
-        fi
-        if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "Draogn12345678" ]; then
-          echo "authenticated=true" >> $GITHUB_OUTPUT 
-          echo "reviewer=Draogn12345678 <unknown>" >> $GITHUB_OUTPUT
-        fi
-        if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "Wildethingz" ]; then
-          echo "authenticated=true" >> $GITHUB_OUTPUT 
-          echo "reviewer=Wildethingz <unknown>" >> $GITHUB_OUTPUT
-        fi
-        if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "Daepicgdplayer" ]; then
-          echo "authenticated=true" >> $GITHUB_OUTPUT 
-          echo "reviewer=Daepicgdplayer <unknown>" >> $GITHUB_OUTPUT
-        fi
-        if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "SpuckwasserDE" ]; then
-          echo "authenticated=true" >> $GITHUB_OUTPUT 
-          echo "reviewer=SpuckwasserDE <unknown>" >> $GITHUB_OUTPUT
-        fi
-        if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "AlwaysJolly" ]; then
-          echo "authenticated=true" >> $GITHUB_OUTPUT 
-          echo "reviewer=AlwaysJolly <31150975+AlwaysJolly@users.noreply.github.com>" >> $GITHUB_OUTPUT
-        fi
+        users=("FlafyDev" "elnexreal" "Draogn12345678" "Wildethingz" "Daepicgdplayer" "SpuckwasserDE" "AlwaysJolly")
+
+        for user in "${users[@]}"; do
+          if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "$user" ]; then
+            echo "authenticated=true" >> $GITHUB_OUTPUT
+            echo "reviewer=$(jq -r .comment.user.login $GITHUB_EVENT_PATH) <$(jq -r .comment.user.id $GITHUB_EVENT_PATH)+$(jq -r .comment.user.login $GITHUB_EVENT_PATH)@users.noreply.github.com>" >> $GITHUB_OUTPUT
+          fi
+        done
 
         comment_body=$(jq -r .comment.body "$GITHUB_EVENT_PATH")
 
