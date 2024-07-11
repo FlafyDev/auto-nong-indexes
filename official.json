@@ -664,5 +664,15 @@
     "songs": [
       100724
     ]
+  },
+  {
+    "name": "After Dark x Sweater Weather",
+    "artist": "Gerson",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "KPq5DGaSQ9I",
+    "songs": [
+      10
+    ]
   }
 ]
