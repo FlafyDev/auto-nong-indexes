@@ -804,5 +804,15 @@
     "songs": [
       8
     ]
+  },
+  {
+    "name": "You have to know this",
+    "artist": "Bobby BoJanglles",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "YB5p0k8-DQo",
+    "songs": [
+      346
+    ]
   }
 ]
