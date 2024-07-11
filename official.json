@@ -674,5 +674,15 @@
     "songs": [
       10
     ]
+  },
+  {
+    "name": "Roundtable Rival",
+    "artist": "Lindsey Stirling",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "jvipPYFebWc",
+    "songs": [
+      801461
+    ]
   }
 ]
