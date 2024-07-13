@@ -16,7 +16,7 @@ jobs:
           days-before-issue-stale: 14
           days-before-issue-close: 7
           stale-issue-label: "stale"
-          operations-per-run: 150
+          operations-per-run: 1500
           stale-issue-message: "This submission is stale because it has been open for 14 days with no activity. If it is still relevant, please leave a comment and we will reopen it."
           close-issue-message: "This submission was closed because it has been inactive for 7 days since being marked as stale. If this is still relevant, please resubmit."
           days-before-pr-stale: -1
