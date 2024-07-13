@@ -1064,5 +1064,15 @@
     "songs": [
       1
     ]
+  },
+  {
+    "name": "Bounce Reimu Fumo",
+    "artist": "Various Artists",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "xc-NtHkhUaI",
+    "songs": [
+      111111
+    ]
   }
 ]
