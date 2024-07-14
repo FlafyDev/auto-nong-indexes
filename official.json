@@ -1264,5 +1264,15 @@
     "songs": [
       2
     ]
+  },
+  {
+    "name": "KOCMOC killoway cover",
+    "artist": "killoway",
+    "source": "youtube",
+    "startOffset": 81000,
+    "yt-id": "ioXKzmMcyao",
+    "songs": [
+      1163222
+    ]
   }
 ]
