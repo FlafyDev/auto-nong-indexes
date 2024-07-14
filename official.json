@@ -1354,5 +1354,15 @@
     "songs": [
       1000000
     ]
+  },
+  {
+    "name": "Lost X World Cup",
+    "artist": "Bejski",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "WIvlC88ynDg",
+    "songs": [
+      945695
+    ]
   }
 ]
