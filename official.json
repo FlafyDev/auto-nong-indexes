@@ -1344,5 +1344,15 @@
     "songs": [
       1317733
     ]
+  },
+  {
+    "name": "Infinite Repeating",
+    "artist": "Daft Punk",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "imBlPXbAv6E",
+    "songs": [
+      1000000
+    ]
   }
 ]
