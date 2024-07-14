@@ -1134,5 +1134,15 @@
     "songs": [
       701013
     ]
+  },
+  {
+    "name": "Mii Channel Music",
+    "artist": "Nintendo",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "E9s1ltPGQOo",
+    "songs": [
+      754325
+    ]
   }
 ]
