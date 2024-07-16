@@ -1444,5 +1444,15 @@
     "songs": [
       6
     ]
+  },
+  {
+    "name": "Lucy VIP (Elfen Lied)",
+    "artist": "Vespar",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "nZ_wr06K058",
+    "songs": [
+      636526
+    ]
   }
 ]
