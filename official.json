@@ -1464,5 +1464,15 @@
     "songs": [
       666666
     ]
+  },
+  {
+    "name": "Shiawase",
+    "artist": "Dion Timmer",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "ACX8jwUFZlo",
+    "songs": [
+      1255249
+    ]
   }
 ]
