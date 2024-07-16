@@ -1,0 +1,40 @@
+{
+    "manifest": 1,
+    "name": "Auto Nong Index",
+    "id": "auto-nong-index",
+    "description": "Official Auto Nong Index",
+    "last-update": 1720981993,
+    "nongs": {
+        "youtube": [
+            {
+                "name": "Lost (XVA Remix)",
+                "artist": "Crim3s",
+                "id": "VZXeoUPPFOY",
+                "songs": [
+                    945695
+                ]
+            }
+        ],
+        "hosted": [
+            {
+                "name": "Lost (XVA Remix)",
+                "artist": "Crim3s",
+                "songs": [
+                    945695
+                ],
+                "url": "https://cdn-sfh.rooot.gay/64f54c6ceba5efcdadf78b01.mp3",
+                "source": "host"
+            }
+        ]
+    },
+    "links": {
+        "discord": "https://discord.gg/xxxxxxxxx"
+    },
+    "features": {
+        "submit": {
+            "request-params": {
+                "url": "https://github.com/FlafyDev/auto-nong-indexes/issues/new?template=add-nong-song.yml"
+            }
+        }
+    }
+}
