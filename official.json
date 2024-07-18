@@ -1684,5 +1684,15 @@
     "songs": [
       13
     ]
+  },
+  {
+    "name": "Brain Power",
+    "artist": "NOMA",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "ThroGkahQFw",
+    "songs": [
+      1299591
+    ]
   }
 ]
