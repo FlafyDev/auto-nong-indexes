@@ -1994,5 +1994,15 @@
     "songs": [
       1
     ]
+  },
+  {
+    "name": "The Beginning",
+    "artist": "MrDumbDuck",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "OefS5GdZxgw",
+    "songs": [
+      1343173
+    ]
   }
 ]
