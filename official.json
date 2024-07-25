@@ -2354,5 +2354,15 @@
     "songs": [
       1987
     ]
+  },
+  {
+    "name": "Pedro",
+    "artist": "Raffaella Carra",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "OCZIzzQpJUw",
+    "songs": [
+      1
+    ]
   }
 ]
