@@ -64,8 +64,17 @@ jobs:
     steps:
       - uses: ahmadnassri/action-workflow-queue@v1
 
+      - name: Generate Token
+        uses: wow-actions/use-app-token@v2
+        id: generate_token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          token: ${{ steps.generate_token.outputs.BOT_TOKEN }}
 
       - uses: stefanbuck/github-issue-parser@v3
         id: issue-parser
@@ -114,13 +123,6 @@ jobs:
             fixes: #${{ github.event.issue.number }}
 
             Reviewed-by: ${{ needs.on-comment.outputs.reviewer }}
-
-      - name: Generate Token
-        uses: wow-actions/use-app-token@v2
-        id: generate_token
-        with:
-          app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }} 
 
       - name: Create Comment
         uses: peter-evans/create-or-update-comment@v4
