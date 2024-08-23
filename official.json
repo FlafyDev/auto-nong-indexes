@@ -3,7 +3,7 @@
   "name": "Auto Nong Index",
   "id": "auto-nong-index",
   "description": "Official Auto Nong Index",
-  "last-update": 1720981993,
+  "lastUpdate": 1720981993,
   "nongs": {
     "youtube": {
       "8e884ace-bee4-11e4-8dfc-aa07a5b093db": {
@@ -33,8 +33,9 @@
   },
   "features": {
     "submit": {
-      "request-params": {
-        "url": "https://github.com/FlafyDev/auto-nong-indexes/issues/new?template=add-nong-song.yml"
+      "requestParams": {
+        "url": "https://github.com/FlafyDev/auto-nong-indexes/issues/new?template=add-nong-song.yml",
+        "params": true
       }
     }
   }
