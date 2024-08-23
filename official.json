@@ -33,6 +33,7 @@
   },
   "features": {
     "submit": {
+      "supportedSongTypes": ["youtube"],
       "requestParams": {
         "url": "https://github.com/FlafyDev/auto-nong-indexes/issues/new?template=add-nong-song.yml",
         "params": true
