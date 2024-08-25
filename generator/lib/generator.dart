@@ -46,7 +46,7 @@ Future<Map<String, Object?>> covnertOfficialIndex() async {
 
   return {
     "manifest": 1,
-    "name": "Auto Nong Index",
+    "name": "Auto Nong",
     "id": "auto-nong-index",
     "description": "Official Auto Nong Index",
     "lastUpdate": DateTime.now().millisecondsSinceEpoch ~/ 1000,
@@ -102,8 +102,8 @@ Future<Map<String, Object?>> genSFHIndex() async {
     final String songName;
     final String artistName;
     if (songFullName.contains(" - ")) {
-      songName = songFullName.substring(0, songFullName.indexOf(" - ")).trim();
-      artistName = songFullName.substring(songFullName.indexOf(" - ")+3).trim();
+      songName = songFullName.substring(songFullName.indexOf(" - ")+3).trim();
+      artistName = songFullName.substring(0, songFullName.indexOf(" - ")).trim();
     } else {
       songName = songFullName;
       artistName = "";
@@ -124,7 +124,7 @@ Future<Map<String, Object?>> genSFHIndex() async {
 
   return {
     "manifest": 1,
-    "name": "Song File Hub Index",
+    "name": "Song File Hub",
     "id": "song-file-hub-index",
     "description": "Song File Hub Index",
     "lastUpdate": DateTime.now().millisecondsSinceEpoch ~/ 1000,
