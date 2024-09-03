@@ -3894,5 +3894,15 @@
     "songs": [
       1110953
     ]
+  },
+  {
+    "name": "TARZAN",
+    "artist": "Unicorn On Ketamine",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "OsHP2deFii8",
+    "songs": [
+      123321
+    ]
   }
 ]
