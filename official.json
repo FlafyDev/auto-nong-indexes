@@ -3944,5 +3944,15 @@
     "songs": [
       100
     ]
+  },
+  {
+    "name": "awareness",
+    "artist": "KENTENSHI",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "LTM5bSPrOFw",
+    "songs": [
+      1
+    ]
   }
 ]
