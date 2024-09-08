@@ -31,6 +31,7 @@ jobs:
         git checkout origin/dist -- 'sfh-rooot.json.gz' || true
         git checkout origin/dist -- 'sfh-pingusmc.json.gz' || true
         git checkout origin/dist -- 'sfh-yt.json.gz' || true
+        git checkout origin/dist -- 'sfh.json.gz' || true
         find . -name "*.json" -exec gzip {} \;
         git add .
         git commit --allow-empty -m "update dist to json at $(git log --pretty=format:"%h" -n 1)"
