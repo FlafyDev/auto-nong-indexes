@@ -4384,5 +4384,15 @@
     "songs": [
       1001
     ]
+  },
+  {
+    "name": "Linkin Park - Given Up",
+    "artist": "Linkin Park",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "0xyxtzD54rM",
+    "songs": [
+      814267
+    ]
   }
 ]
