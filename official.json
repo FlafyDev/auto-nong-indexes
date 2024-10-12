@@ -4404,5 +4404,15 @@
     "songs": [
       100
     ]
+  },
+  {
+    "name": "Christmas kids",
+    "artist": "Roar",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "9o0pXI5jkyg",
+    "songs": [
+      1001
+    ]
   }
 ]
