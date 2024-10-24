@@ -4694,5 +4694,15 @@
     "songs": [
       360804
     ]
+  },
+  {
+    "name": "hatsune miku",
+    "artist": "hapi =>",
+    "source": "youtube",
+    "startOffset": 250,
+    "yt-id": "VQOJ_SZ0Nto",
+    "songs": [
+      832007
+    ]
   }
 ]
