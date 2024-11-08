@@ -9,15 +9,11 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    # - name: Debounce 1 minute
-    #   uses: zachary95/github-actions-debounce
-    #   with:
-    #     wait: 60
-
-    - name: Checkout code
+    - name: Checkout repository
       uses: actions/checkout@v4
 
-    - uses: stefanbuck/github-issue-parser@v3
+    - name: Parse Issue Template
+      uses: stefanbuck/github-issue-parser@v3
       id: issue-parser
       with:
         template-path: .github/ISSUE_TEMPLATE/add-nong-song.yml
@@ -45,7 +41,7 @@ jobs:
       id: generate_token
       with:
         app_id: ${{ secrets.APP_ID }}
-        private_key: ${{ secrets.APP_PRIVATE_KEY }} 
+        private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
     - name: Find Comment
       uses: peter-evans/find-comment@v3
@@ -53,10 +49,11 @@ jobs:
       with:
         issue-number: ${{ github.event.issue.number }}
         comment-author: 'auto-nong[bot]'
-        body-includes: Thanks for contributing
+        body-includes: 'Thanks for contributing'
 
-    - if: steps.find-comment.outputs.comment-id != ''
-      uses: actions/github-script@v6
+    - name: Delete Comment
+      if: steps.find-comment.outputs.comment-id != ''
+      uses: actions/github-script@v7
       with:
         github-token: ${{ steps.generate_token.outputs.BOT_TOKEN }}
         script: |
@@ -66,7 +63,7 @@ jobs:
             comment_id: ${{ steps.find-comment.outputs.comment-id }}
           })
 
-    - name: Create comment
+    - name: Create Comment
       uses: peter-evans/create-or-update-comment@v4
       with:
         issue-number: ${{ github.event.issue.number }}
