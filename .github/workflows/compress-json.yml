@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch: # Manually trigger workflow
+  workflow_dispatch:
 
 jobs:
   compress-json:
@@ -14,16 +14,16 @@ jobs:
     - name: Debounce 30 seconds
       uses: zachary95/github-actions-debounce@v0.1.0
       with:
-        wait: 1
+        wait: 30
 
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Compress JSON files and push to separate branch
       if: steps.check-commits.outputs.NEW_COMMITS == ${{ github.sha }}
       run: |
-        git config user.name "GitHub Actions Bot"
-        git config user.email "<>"
+        git config user.name "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git fetch origin
         git checkout origin/dist
         git checkout -b dist-edit
@@ -37,4 +37,3 @@ jobs:
         git add .
         git commit --allow-empty -m "update dist to json at $(git log --pretty=format:"%h" -n 1)"
         git push origin dist-edit:dist
-
