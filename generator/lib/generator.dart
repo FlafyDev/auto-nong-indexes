@@ -12,8 +12,10 @@ Future<void> jsonToIndexFile(File file, Map<String, Object?> data) async {
 }
 
 Future<Map<String, Object?>> covnertOfficialIndex() async {
-  final res = await http.get(Uri.parse('https://raw.githubusercontent.com/FlafyDev/auto-nong-indexes/main/official.json'));
-  final obj = (json.decode(res.body) as List<dynamic>).cast<Map<String, dynamic>>();
+  final res = await http.get(Uri.parse(
+      'https://raw.githubusercontent.com/FlafyDev/auto-nong-indexes/main/official.json'));
+  final obj =
+      (json.decode(res.body) as List<dynamic>).cast<Map<String, dynamic>>();
 
   final ytSongs = obj.fold<Map<String, dynamic>>({}, (acc, entry) {
     final ytID = entry['yt-id'];
@@ -30,7 +32,8 @@ Future<Map<String, Object?>> covnertOfficialIndex() async {
 
     final startOffset = entry['startOffset'] ?? 0;
 
-    final id = uuid.v5("8dd3aa81-28f2-40ca-afad-314ddd5caadd", name+artist+songs.toString()+ytID+startOffset.toString());
+    final id = uuid.v5("8dd3aa81-28f2-40ca-afad-314ddd5caadd",
+        name + artist + songs.toString() + ytID + startOffset.toString());
 
     return {
       ...acc,
@@ -68,9 +71,11 @@ Pressing continue will redirect you to the GitHub issue page to submit your song
 5. Links from Google Drive, Mediafire, Dropbox, etc are not allowed. Please only submit YouTube video links, or **permanent** direct download links from CDNs that has given permission for Auto Nong to download from. Right now there isn't any CDNs that are allowed. If you don't want to upload to YouTube then submit to the SFH. 
 
 Only Auto Nong Moderators and Beginner Moderators can accept or reject submissions. This is done by commenting "accept" or "reject" under a submission.
-""".trim(),
+"""
+            .trim(),
         "requestParams": {
-          "url": "https://github.com/FlafyDev/auto-nong-indexes/issues/new?template=add-nong-song.yml&extra=From%20Jukebox&",
+          "url":
+              "https://github.com/FlafyDev/auto-nong-indexes/issues/new?template=add-nong-song.yml&extra=From%20Jukebox&",
           "params": true,
         },
       },
@@ -84,10 +89,38 @@ Only Auto Nong Moderators and Beginner Moderators can accept or reject submissio
 
 Future<Map<String, Object?>> genSFHIndex() async {
   final res = await http.get(Uri.parse('https://api.songfilehub.com/songs'));
-  final obj = (json.decode(res.body) as List<dynamic>).cast<Map<String, dynamic>>();
+  final obj =
+      (json.decode(res.body) as List<dynamic>).cast<Map<String, dynamic>>();
 
   final hostedSongs = obj.fold<Map<String, dynamic>>({}, (acc, entry) {
-    final songID = int.tryParse(entry['songID'] ?? "");
+    var songID = int.tryParse(entry['songID'] ?? "");
+
+    songID ??= switch ((entry['songID'] as String).toLowerCase()) {
+      "stereomadness" => -1,
+      "backontrack" => -2,
+      "polargeist" => -3,
+      "dryout" => -4,
+      "baseafterbase" => -5,
+      "cantletgo" => -6,
+      "jumper" => -7,
+      "timemachine" => -8,
+      "cycles" => -9,
+      "xstep" => -10,
+      "clutterfunk" => -11,
+      "theoryofeverything" => -12,
+      "electromanadventures" => -13,
+      "electroman" => -13,
+      "clubstep" => -14,
+      "electrodynamix" => -15,
+      "hexagonforce" => -16,
+      "blastprocessing" => -17,
+      "theoryofeverything2" => -18,
+      "geometricaldominator" => -19,
+      "deadlocked" => -20,
+      "fingerdash" => -21,
+      "dash" => -22,
+      _ => null,
+    };
 
     if (songID == null) return acc;
 
@@ -102,8 +135,9 @@ Future<Map<String, Object?>> genSFHIndex() async {
     final String songName;
     final String artistName;
     if (songFullName.contains(" - ")) {
-      songName = songFullName.substring(songFullName.indexOf(" - ")+3).trim();
-      artistName = songFullName.substring(0, songFullName.indexOf(" - ")).trim();
+      songName = songFullName.substring(songFullName.indexOf(" - ") + 3).trim();
+      artistName =
+          songFullName.substring(0, songFullName.indexOf(" - ")).trim();
     } else {
       songName = songFullName;
       artistName = "";
@@ -120,7 +154,6 @@ Future<Map<String, Object?>> genSFHIndex() async {
       },
     };
   });
-
 
   return {
     "manifest": 1,
@@ -141,7 +174,8 @@ Please read the rules and walkthroughs for the commands before submitting!
 Only mp3/ogg files are supported.
 
 Disclaimer: It may take a bit to show on Jukebox's song list after being accepted. 
-""".trim(),
+"""
+            .trim(),
         "requestParams": {
           "url": "https://discord.gg/maSgd4zpEF",
           "params": false,
