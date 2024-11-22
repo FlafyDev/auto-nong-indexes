@@ -1,0 +1,34 @@
+name: Update SFH Index
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+jobs:
+  dart-generator-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout branch v2
+        uses: actions/checkout@v3
+        with:
+          ref: v2
+
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1
+
+      - name: Run the Dart generator
+        run: |
+          cd generator
+          dart pub get
+          dart run bin/generator.dart
+          cd ..
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git diff-index --quiet HEAD || git commit -m "chore: update SFH index"
+          git push origin v2
