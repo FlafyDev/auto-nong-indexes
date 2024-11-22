@@ -20,6 +20,7 @@ jobs:
 
       - name: Run the Dart generator
         run: |
+          git checkout main -- generator
           cd generator
           dart pub get
           dart run bin/generator.dart
