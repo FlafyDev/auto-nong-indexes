@@ -33,6 +33,7 @@ jobs:
         run: |
           git config --local user.name "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git restore --staged .
           git add sfh-index.min.json
           git diff-index --quiet HEAD || git commit -m "chore: update SFH index"
           git push origin v2
