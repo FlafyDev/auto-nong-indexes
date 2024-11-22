@@ -20,7 +20,8 @@ jobs:
 
       - name: Run the Dart generator
         run: |
-          git checkout main -- generator
+          git fetch origin main --depth 1
+          git checkout origin/main -- generator
           cd generator
           dart pub get --enforce-lockfile
           dart run bin/generator.dart
