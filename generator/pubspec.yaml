@@ -1,12 +1,10 @@
 name: generator
-description: A sample command-line application.
+description: Auto Nong index generator.
 version: 1.0.0
-# repository: https://github.com/my_org/my_repo
 
 environment:
   sdk: ^3.4.3
 
-# Add regular dependencies here.
 dependencies:
   http: ^1.2.2
   uuid: ^4.4.2
