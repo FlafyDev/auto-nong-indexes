@@ -1,0 +1,6 @@
+version: 2
+updates:
+  - package-ecosystem: "pub"
+    directory: "/generator"
+    schedule:
+      interval: "weekly"
