@@ -1,4 +1,4 @@
-name: Update SFH Index
+name: Update SFH Index (hourly)
 
 on:
   schedule:
@@ -10,15 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout branch v2
-        uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
           ref: v2
 
       - name: Set up Dart
         uses: dart-lang/setup-dart@v1
         with:
-          sdk: 3.5.3
+          sdk: stable
 
       - name: Run the Dart generator
         run: |
