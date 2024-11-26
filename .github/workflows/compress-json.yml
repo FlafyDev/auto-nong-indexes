@@ -1,4 +1,4 @@
-name: Compress JSON Files
+name: Compress JSON files
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Debounce 30 seconds
-      uses: zachary95/github-actions-debounce@v0.1.0
+      uses: zachary95/github-actions-debounce@v0.1.0  # <- Update this to use latest package versions
       with:
         wait: 30
 
