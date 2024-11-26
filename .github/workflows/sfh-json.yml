@@ -1,4 +1,4 @@
-name: Generate SFH JSON Files
+name: Generate SFH JSON Files (daily)
 
 on:
   schedule:
