@@ -13,27 +13,27 @@ jobs:
       authenticated: ${{ steps.check-comment.outputs.authenticated }}
       reviewer: ${{ steps.check-comment.outputs.reviewer }}
     steps:
-    - name: Check Comment
-      id: check-comment
-      run: |
-        users=("FlafyDev" "Daepicgdplayer" "elnexreal" "SpuckwasserDE" "AlwaysJolly" "IMGer4" "vsaucing" "LousyBook-01" "OM3GA6400" "neprao" "Lostconscious" "gdhpsk" "M336G" "Cosmo304" "comicsteel")
+      - name: Check Comment
+        id: check-comment
+        run: |
+          users=("FlafyDev" "Daepicgdplayer" "SpuckwasserDE" "AlwaysJolly" "IMGer4" "vsaucing" "LousyBook-01" "om3ga6400" "neprao" "Lostconscious" "gdhpsk" "M336G" "Cosmo304" "comicsteel")
 
-        for user in "${users[@]}"; do
-          if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "$user" ]; then
-            echo "authenticated=true" >> $GITHUB_OUTPUT
-            echo "reviewer=$(jq -r .comment.user.login $GITHUB_EVENT_PATH) <$(jq -r .comment.user.id $GITHUB_EVENT_PATH)+$(jq -r .comment.user.login $GITHUB_EVENT_PATH)@users.noreply.github.com>" >> $GITHUB_OUTPUT
+          for user in "${users[@]}"; do
+            if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "$user" ]; then
+              echo "authenticated=true" >> $GITHUB_OUTPUT
+              echo "reviewer=$(jq -r .comment.user.login $GITHUB_EVENT_PATH) <$(jq -r .comment.user.id $GITHUB_EVENT_PATH)+$(jq -r .comment.user.login $GITHUB_EVENT_PATH)@users.noreply.github.com>" >> $GITHUB_OUTPUT
+            fi
+          done
+
+          comment_body=$(jq -r .comment.body "$GITHUB_EVENT_PATH")
+
+          if echo "$comment_body" | grep -q '^accept'; then
+              echo "add-nong=true" >> "$GITHUB_OUTPUT"
           fi
-        done
 
-        comment_body=$(jq -r .comment.body "$GITHUB_EVENT_PATH")
-
-        if echo "$comment_body" | grep -q '^accept'; then
-            echo "add-nong=true" >> "$GITHUB_OUTPUT"
-        fi
-
-        if echo "$comment_body" | grep -q '^reject'; then
-            echo "reject=true" >> "$GITHUB_OUTPUT"
-        fi
+          if echo "$comment_body" | grep -q '^reject'; then
+              echo "reject=true" >> "$GITHUB_OUTPUT"
+          fi
 
   on-comment-reject-nong:
     runs-on: ubuntu-latest
@@ -42,7 +42,7 @@ jobs:
     steps:
       - uses: ahmadnassri/action-workflow-queue@v1
 
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Generate Token
@@ -71,12 +71,13 @@ jobs:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ steps.generate_token.outputs.BOT_TOKEN }}
 
-      - uses: stefanbuck/github-issue-parser@v3
+      - name: Parse Issue Template
+        uses: stefanbuck/github-issue-parser@v3
         id: issue-parser
         with:
           template-path: .github/ISSUE_TEMPLATE/add-nong-song.yml
@@ -85,12 +86,11 @@ jobs:
         id: evaluate-issue
         run: ./.github/generate-nong-issue-json.bash
 
-      - name: Generate Issue Message And Commit Details
+      - name: Generate Issue Message and Commit Details
         id: generate-details
         run: |
           echo "author_name=$(jq -r .issue.user.login $GITHUB_EVENT_PATH)" >> $GITHUB_OUTPUT
           echo "author_email=$(jq -r .issue.user.id $GITHUB_EVENT_PATH)+$(jq -r .issue.user.login $GITHUB_EVENT_PATH)@users.noreply.github.com" >> $GITHUB_OUTPUT
-
           echo "song_name=$(jq -r .name result.json)" >> $GITHUB_OUTPUT
           echo "artist_name=$(jq -r .artist result.json)" >> $GITHUB_OUTPUT
 
@@ -118,9 +118,9 @@ jobs:
           committer_name: ${{ steps.bot-details.outputs.name }}
           committer_email: ${{ steps.bot-details.outputs.email }}
           message: |
-            official: Add ${{ steps.generate-details.outputs.song_name }} by ${{ steps.generate-details.outputs.artist_name }}
+            Official: Add ${{ steps.generate-details.outputs.song_name }} by ${{ steps.generate-details.outputs.artist_name }}
 
-            fixes: #${{ github.event.issue.number }}
+            Fixes: #${{ github.event.issue.number }}
 
             Reviewed-by: ${{ needs.on-comment.outputs.reviewer }}
 
