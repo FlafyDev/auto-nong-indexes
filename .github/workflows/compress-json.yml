@@ -28,5 +28,5 @@ jobs:
         git checkout origin/dist -- 'sfh.json.gz' || true
         find . -name "*.json" -exec gzip {} \;
         git add .
-        git commit --allow-empty -m "update dist to json at $(git log --pretty=format:"%h" -n 1)"
-        git push origin dist-edit:dist
+        git commit --allow-empty -m "Update dist to JSON at $(git log --pretty=format:"%h" -n 1)"
+        git push
