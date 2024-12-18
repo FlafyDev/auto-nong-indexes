@@ -18,8 +18,6 @@ jobs:
         git config user.name "github-actions[bot]"
         git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git fetch origin
-        git checkout origin/dist
-        git checkout -b dist-edit
         git rm -r . || true
         git checkout main -- '*.json'
         git checkout origin/dist -- 'sfh-rooot.json.gz' || true
