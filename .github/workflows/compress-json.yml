@@ -11,11 +11,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Debounce 30 seconds
-      uses: zachary95/github-actions-debounce@v0.1.0  # <- Update this to use latest package versions
-      with:
-        wait: 30
-
     - name: Checkout repository
       uses: actions/checkout@v4
 
