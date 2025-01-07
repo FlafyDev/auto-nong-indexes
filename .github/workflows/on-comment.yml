@@ -13,27 +13,26 @@ jobs:
       authenticated: ${{ steps.check-comment.outputs.authenticated }}
       reviewer: ${{ steps.check-comment.outputs.reviewer }}
     steps:
-    - name: Check Comment
-      id: check-comment
-      run: |
-        users=("FlafyDev" "Daepicgdplayer" "elnexreal" "SpuckwasserDE" "AlwaysJolly" "IMGer4" "vsaucing" "LousyBook-01" "OM3GA6400" "neprao" "Lostconscious" "gdhpsk" "M336G" "Cosmo304" "comicsteel")
+      - name: Check comment
+        id: check-comment
+        run: |
+          users=("FlafyDev" "Daepicgdplayer" "elnexreal" "SpuckwasserDE" "AlwaysJolly" "IMGer4" "vsaucing" "LousyBook-01" "om3ga6400" "neprao" "Lostconscious" "gdhpsk" "M336G" "Cosmo304" "comicsteel")
 
-        for user in "${users[@]}"; do
-          if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "$user" ]; then
-            echo "authenticated=true" >> $GITHUB_OUTPUT
-            echo "reviewer=$(jq -r .comment.user.login $GITHUB_EVENT_PATH) <$(jq -r .comment.user.id $GITHUB_EVENT_PATH)+$(jq -r .comment.user.login $GITHUB_EVENT_PATH)@users.noreply.github.com>" >> $GITHUB_OUTPUT
+          for user in "${users[@]}"; do
+            if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "$user" ]; then
+              echo "authenticated=true" >> $GITHUB_OUTPUT
+              echo "reviewer=$(jq -r .comment.user.login $GITHUB_EVENT_PATH) <$(jq -r .comment.user.id $GITHUB_EVENT_PATH)+$(jq -r .comment.user.login $GITHUB_EVENT_PATH)@users.noreply.github.com>" >> $GITHUB_OUTPUT
+            fi
+          done
+
+          comment_body=$(jq -r .comment.body "$GITHUB_EVENT_PATH")
+
+          if echo "$comment_body" | grep -q '^accept'; then
+              echo "add-nong=true" >> "$GITHUB_OUTPUT"
           fi
-        done
 
-        comment_body=$(jq -r .comment.body "$GITHUB_EVENT_PATH")
-
-        if echo "$comment_body" | grep -q '^accept'; then
-            echo "add-nong=true" >> "$GITHUB_OUTPUT"
-        fi
-
-        if echo "$comment_body" | grep -q '^reject'; then
-            echo "reject=true" >> "$GITHUB_OUTPUT"
-        fi
+          if echo "$comment_body" | grep -q '^reject'; then
+              echo "reject=true" >> "$GITHUB_OUTPUT"
 
   on-comment-reject-nong:
     runs-on: ubuntu-latest
@@ -42,17 +41,17 @@ jobs:
     steps:
       - uses: ahmadnassri/action-workflow-queue@v1
 
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Generate Token
+      - name: Generate token
         uses: wow-actions/use-app-token@v2
         id: generate_token
         with:
           app_id: ${{ secrets.APP_ID }}
-          private_key: ${{ secrets.APP_PRIVATE_KEY }} 
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - name: Close Issue
+      - name: Close issue
         run: gh issue close ${{ github.event.issue.number }} --reason "not planned"
         env:
           GH_TOKEN: ${{ steps.generate_token.outputs.BOT_TOKEN }}
@@ -64,28 +63,29 @@ jobs:
     steps:
       - uses: ahmadnassri/action-workflow-queue@v1
 
-      - name: Generate Token
+      - name: Generate token
         uses: wow-actions/use-app-token@v2
         id: generate_token
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           token: ${{ steps.generate_token.outputs.BOT_TOKEN }}
 
-      - uses: stefanbuck/github-issue-parser@v3
+      - name: Parse issue template
+        uses: stefanbuck/github-issue-parser@v3
         id: issue-parser
         with:
           template-path: .github/ISSUE_TEMPLATE/add-nong-song.yml
 
-      - name: Evaluate Issue
+      - name: Evaluate issue
         id: evaluate-issue
         run: ./.github/generate-nong-issue-json.bash
 
-      - name: Generate Issue Message And Commit Details
+      - name: Generate issue message and commit details
         id: generate-details
         run: |
           echo "author_name=$(jq -r .issue.user.login $GITHUB_EVENT_PATH)" >> $GITHUB_OUTPUT
@@ -98,18 +98,18 @@ jobs:
           Added $(jq -r .name result.json) to Auto Nong ✨
           EOF
 
-      - name: Make Changes
+      - name: Make changes
         id: make-changes
         run: |
           jq --argjson newObject "$(cat result.json)" '. += [$newObject]' official.json > temp.json && mv temp.json official.json
 
-      - name: Bot Details
+      - name: Bot details
         id: bot-details
         uses: raven-actions/bot-details@v1
         with:
           bot-slug-name: auto-nong
 
-      - name: Add Commit And Push
+      - name: Add and commit
         uses: EndBug/add-and-commit@v9
         with:
           add: 'official.json'
@@ -124,7 +124,7 @@ jobs:
 
             Reviewed-by: ${{ needs.on-comment.outputs.reviewer }}
 
-      - name: Create Comment
+      - name: Create comment
         uses: peter-evans/create-or-update-comment@v4
         with:
           issue-number: ${{ github.event.issue.number }}
