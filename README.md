@@ -1,17 +1,23 @@
-# Auto Nong Indexes
-My indexes for the GD Mod Auto Nong.
+# NONG Indexes
 
-#### Get the indexes in this repo:
-- `https://cdn.jsdelivr.net/gh/FlafyDev/auto-nong-indexes@dist/official.json.gz`
-- `https://cdn.jsdelivr.net/gh/FlafyDev/auto-nong-indexes@dist/sfh-yt.json.gz`
-- `https://cdn.jsdelivr.net/gh/FlafyDev/auto-nong-indexes@dist/sfh-rooot.json.gz`
-- `https://cdn.jsdelivr.net/gh/FlafyDev/auto-nong-indexes@dist/sfh-pingusmc.json.gz`
+This repository contains indexes for Auto Nong and Jukebox.
 
-###### If the indexes are not up to date with the `dist` branch, use [this to update them](https://www.jsdelivr.com/tools/purge).
+## Available Indexes
 
+You can get the indexes from the following links:
 
-## Adding
-To add a NONG song to the official index PR it to `official.json`.  
-Or you can add it to SFH and eventually it will be added to the SFH index.  
+- [Official Index](https://cdn.jsdelivr.net/gh/FlafyDev/auto-nong-indexes@dist/official.json.gz)
+- [SFH YouTube Index](https://cdn.jsdelivr.net/gh/FlafyDev/auto-nong-indexes@dist/sfh-yt.json.gz)
+- [SFH Root Index](https://cdn.jsdelivr.net/gh/FlafyDev/auto-nong-indexes@dist/sfh-rooot.json.gz)
+- [SFH PingusMC Index](https://cdn.jsdelivr.net/gh/FlafyDev/auto-nong-indexes@dist/sfh-pingusmc.json.gz)
 
-SFH index updates daily.
+#### Note:
+If the indexes are not up to date with the `dist` branch, you can update them by using [this tool](https://www.jsdelivr.com/tools/purge).
+
+## Adding New Songs
+
+To add a NONG song to the official index, create an issue.
+
+Alternatively, you can add the song to the SFH index, and it will eventually be included in the SFH index.
+
+Also the SFH index is updated daily.
