@@ -2,31 +2,30 @@ name: Generate SFH JSON Files
 
 on:
   schedule:
-    - cron: '0 0 * * *' # daily
-  workflow_dispatch: # Manually trigger workflow
+    - cron: '0 0 * * *'
+  workflow_dispatch:
 
 jobs:
   compress-json:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Compress JSON files and push to separate branch
-      if: steps.check-commits.outputs.NEW_COMMITS == ${{ github.sha }}
-      run: |
-        git config user.name "GitHub Actions Bot"
-        git config user.email "<>"
-        git fetch origin
-        git checkout origin/dist
-        git checkout -b dist-edit
-        json="$(curl https://api.songfilehub.com/songs)"
-        echo "$json" | jq -c '[.[] | select(try(.songID | tonumber | . != null)) | select(.songURL | contains("youtu.be") or contains("youtube.com")) | {name: (.songName | if contains(" - ") then split(" - ")[1] else . end), artist: (.songName | if contains(" - ") then split(" - ")[0] else "" end), songs: [.songID | tonumber], "yt-id": .songURL | capture("(youtu.be/|v=)(?<id>[^&?/]+)") | .id, source: "youtube"}]' | gzip > sfh-yt.json.gz
-        echo "$json" | jq -c '[.[] | select(try(.songID | tonumber | . != null)) | {name: (.songName | if contains(" - ") then split(" - ")[1] else . end), artist: (.songName | if contains(" - ") then split(" - ")[0] else "" end), songs: [.songID | tonumber], url: "https://api.songfilehub.com/song/\(._id)?download=true", source: "host"}]' | gzip > sfh.json.gz
-        echo "$json" | jq -c '[.[] | select(try(.songID | tonumber | . != null)) | {name: (.songName | if contains(" - ") then split(" - ")[1] else . end), artist: (.songName | if contains(" - ") then split(" - ")[0] else "" end), songs: [.songID | tonumber], url: "https://cdn-sfh.rooot.gay/\(._id).mp3", source: "host"}]' | gzip > sfh-rooot.json.gz
-        echo "$json" | jq -c '[.[] | select(try(.songID | tonumber | . != null)) | {name: (.songName | if contains(" - ") then split(" - ")[1] else . end), artist: (.songName | if contains(" - ") then split(" - ")[0] else "" end), songs: [.songID | tonumber], url: "https://cdn-sfh.pingusmc.org/\(._id).mp3", source: "host"}]' | gzip > sfh-pingusmc.json.gz
-        git add .
-        git commit --allow-empty -m "update SFH dist"
-        git push origin dist-edit:dist
-
+      - name: Compress JSON files and commit
+        if: steps.check-commits.outputs.NEW_COMMITS == ${{ github.sha }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin
+          git checkout origin/dist
+          git checkout -b dist-edit
+          json="$(curl https://api.songfilehub.com/songs)"
+          echo "$json" | jq -c '[.[] | select(try(.songID | tonumber | . != null)) | select(.songURL | contains("youtu.be") or contains("youtube.com")) | {name: (.songName | if contains(" - ") then split(" - ")[1] else . end), artist: (.songName | if contains(" - ") then split(" - ")[0] else "" end), songs: [.songID | tonumber], "yt-id": .songURL | capture("(youtu.be/|v=)(?<id>[^&?/]+)") | .id, source: "youtube"}]' | gzip > sfh-yt.json.gz
+          echo "$json" | jq -c '[.[] | select(try(.songID | tonumber | . != null)) | {name: (.songName | if contains(" - ") then split(" - ")[1] else . end), artist: (.songName | if contains(" - ") then split(" - ")[0] else "" end), songs: [.songID | tonumber], url: "https://api.songfilehub.com/song/\(._id)?download=true", source: "host"}]' | gzip > sfh.json.gz
+          echo "$json" | jq -c '[.[] | select(try(.songID | tonumber | . != null)) | {name: (.songName | if contains(" - ") then split(" - ")[1] else . end), artist: (.songName | if contains(" - ") then split(" - ")[0] else "" end), songs: [.songID | tonumber], url: "https://cdn-sfh.rooot.gay/\(._id).mp3", source: "host"}]' | gzip > sfh-rooot.json.gz
+          echo "$json" | jq -c '[.[] | select(try(.songID | tonumber | . != null)) | {name: (.songName | if contains(" - ") then split(" - ")[1] else . end), artist: (.songName | if contains(" - ") then split(" - ")[0] else "" end), songs: [.songID | tonumber], url: "https://cdn-sfh.pingusmc.org/\(._id).mp3", source: "host"}]' | gzip > sfh-pingusmc.json.gz
+          git add .
+          git commit --allow-empty -m "update SFH dist"
+          git push origin dist-edit:dist
