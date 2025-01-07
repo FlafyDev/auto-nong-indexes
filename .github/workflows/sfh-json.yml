@@ -1,9 +1,9 @@
 name: Generate SFH JSON Files
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'
-  workflow_dispatch:
 
 jobs:
   compress-json:
