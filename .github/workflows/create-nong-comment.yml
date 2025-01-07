@@ -1,4 +1,4 @@
-name: Nong Issue Message
+name: NONG Issue Message
 
 on:
   issues:
@@ -7,68 +7,65 @@ on:
 jobs:
   create-nong-comment:
     runs-on: ubuntu-latest
-    
+
     steps:
-    # - name: Debounce 1 minute
-    #   uses: zachary95/github-actions-debounce
-    #   with:
-    #     wait: 60
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - name: Parse issue template
+        uses: stefanbuck/github-issue-parser@v3
+        id: issue-parser
+        with:
+          template-path: .github/ISSUE_TEMPLATE/add-nong-song.yml
 
-    - uses: stefanbuck/github-issue-parser@v3
-      id: issue-parser
-      with:
-        template-path: .github/ISSUE_TEMPLATE/add-nong-song.yml
+      - name: Evaluate issue
+        id: evaluate-issue
+        run: ./.github/generate-nong-issue-json.bash
 
-    - name: Evaluate Issue
-      id: evaluate-issue
-      run: ./.github/generate-nong-issue-json.bash
+      - name: Generate issue message
+        id: generate-issue-message
+        run: |
+          cat > body.md << EOF
+          Thanks for contributing!
+          Someone will soon review your request.
 
-    - name: Generate Issue Message
-      id: generate-issue-message
-      run: |
-        cat > body.md << EOF
-        Thanks for contributing!
-        Someone will soon review your request.
+          Here is the JSON result for the reviewer:
+          \`\`\`json
+          $(cat result.json)
+          \`\`\`
+          To accept the request, a reviewer needs to write "accept".
+          EOF
 
-        Here is the JSON result for the reviewer:
-        \`\`\`json
-        $(cat result.json)
-        \`\`\`
-        To accept the request, a reviewer needs to write "accept".
-        EOF
+      - name: Generate token
+        uses: wow-actions/use-app-token@v2
+        id: generate_token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
-    - name: Generate Token
-      uses: wow-actions/use-app-token@v2
-      id: generate_token
-      with:
-        app_id: ${{ secrets.APP_ID }}
-        private_key: ${{ secrets.APP_PRIVATE_KEY }} 
+      - name: Find comment
+        uses: peter-evans/find-comment@v3
+        id: find-comment
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          comment-author: 'auto-nong[bot]'
+          body-includes: Thanks for contributing!
 
-    - name: Find Comment
-      uses: peter-evans/find-comment@v3
-      id: find-comment
-      with:
-        issue-number: ${{ github.event.issue.number }}
-        comment-author: 'auto-nong[bot]'
-        body-includes: Thanks for contributing
+      - name: Delete existing comment
+        if: steps.find-comment.outputs.comment-id != ''
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ steps.generate_token.outputs.BOT_TOKEN }}
+          script: |
+            github.rest.issues.deleteComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: ${{ steps.find-comment.outputs.comment-id }}
+            })
 
-    - if: steps.find-comment.outputs.comment-id != ''
-      uses: actions/github-script@v6
-      with:
-        github-token: ${{ steps.generate_token.outputs.BOT_TOKEN }}
-        script: |
-          github.rest.issues.deleteComment({
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            comment_id: ${{ steps.find-comment.outputs.comment-id }}
-          })
-
-    - name: Create comment
-      uses: peter-evans/create-or-update-comment@v4
-      with:
-        issue-number: ${{ github.event.issue.number }}
-        body-path: body.md
-        token: ${{ steps.generate_token.outputs.BOT_TOKEN }}
+      - name: Create or update comment
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body-path: body.md
+          token: ${{ steps.generate_token.outputs.BOT_TOKEN }}
