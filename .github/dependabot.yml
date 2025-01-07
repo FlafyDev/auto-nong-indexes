@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: "dart"
+  - package-ecosystem: "pub"
     directory: "/generator"
     schedule:
       interval: "daily"
