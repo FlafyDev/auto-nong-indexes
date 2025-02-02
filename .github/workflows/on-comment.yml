@@ -18,7 +18,7 @@ jobs:
       - name: Check comment
         id: check-comment
         run: |
-          users=("FlafyDev" "Daepicgdplayer" "elnexreal" "SpuckwasserDE" "AlwaysJolly" "IMGer4" "vsaucing" "LousyBook-01" "om3ga6400" "neprao" "Lostconscious" "gdhpsk" "M336G" "Cosmo304" "comicsteel")
+          users=("FlafyDev" "Daepicgdplayer" "SpuckwasserDE" "AlwaysJolly" "IMGer4" "vsaucing" "LousyBook-01" "om3ga6400" "neprao" "Lostconscious" "gdhpsk" "M336G" "Cosmo304" "comicsteel")
 
           for user in "${users[@]}"; do
             if [ "$(jq -r .comment.user.login $GITHUB_EVENT_PATH)" = "$user" ]; then
