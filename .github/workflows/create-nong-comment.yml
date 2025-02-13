@@ -1,4 +1,4 @@
-name: NONG Issue Message
+name: NONG Index issue reply
 
 on:
   issues:
