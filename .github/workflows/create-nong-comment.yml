@@ -48,7 +48,7 @@ jobs:
         id: find-comment
         with:
           issue-number: ${{ github.event.issue.number }}
-          comment-author: 'auto-nong[bot]'
+          comment-author: 'nong-index[bot]'
           body-includes: Thanks for contributing!
 
       - name: Delete existing comment
