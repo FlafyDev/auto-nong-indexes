@@ -49,8 +49,8 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Generate token
-        uses: wow-actions/use-app-token@v2
         id: generate_token
+        uses: wow-actions/use-app-token@v2
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
@@ -70,8 +70,8 @@ jobs:
       - uses: ahmadnassri/action-workflow-queue@v1
 
       - name: Generate token
-        uses: wow-actions/use-app-token@v2
         id: generate_token
+        uses: wow-actions/use-app-token@v2
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
@@ -82,8 +82,8 @@ jobs:
           token: ${{ steps.generate_token.outputs.BOT_TOKEN }}
 
       - name: Parse issue template
-        uses: stefanbuck/github-issue-parser@v3
         id: issue-parser
+        uses: stefanbuck/github-issue-parser@v3
         with:
           template-path: .github/ISSUE_TEMPLATE/add-nong-song.yml
 
@@ -124,9 +124,9 @@ jobs:
           committer_name: ${{ steps.bot-details.outputs.name }}
           committer_email: ${{ steps.bot-details.outputs.email }}
           message: |
-            official: Add ${{ steps.generate-details.outputs.song_name }} by ${{ steps.generate-details.outputs.artist_name }}
+            Official: Add ${{ steps.generate-details.outputs.song_name }} by ${{ steps.generate-details.outputs.artist_name }}
 
-            fixes: #${{ github.event.issue.number }}
+            Fixes: #${{ github.event.issue.number }}
 
             Reviewed-by: ${{ needs.on-comment.outputs.reviewer }}
 
