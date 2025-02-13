@@ -49,9 +49,9 @@ Future<Map<String, Object?>> convertOfficialIndex() async {
 
   return {
     "manifest": 1,
-    "name": "Auto Nong",
-    "id": "auto-nong-index",
-    "description": "Official Auto Nong Index",
+    "name": "NONG Index",
+    "id": "nong-index",
+    "description": "Official NONG Index",
     "lastUpdate": DateTime.now().millisecondsSinceEpoch ~/ 1000,
     "links": {
       "discord": "https://discord.gg/twuZ3X35yM",
@@ -70,7 +70,7 @@ Pressing continue will redirect you to the GitHub issue page to submit your song
 4. **Test the submission in-game** before submitting/accepting it. If it has a corresponding level, ensure it syncs with it. If it's a remix/mashup, ensure it syncs with the replaced song. Test in-game by adding a new song and copying the YouTube ID from the submission.
 5. Links from Google Drive, Mediafire, Dropbox, etc., are not allowed. Only submit YouTube video links or **permanent** direct download links from CDNs that Auto Nong has permission to download from. Currently, no CDNs are allowed. If you don't want to upload to YouTube, submit to the SFH.
 
-Only Auto Nong Moderators and Beginner Moderators can accept or reject submissions by commenting "accept" or "reject" under a submission.
+Only NONG Index moderators can accept or reject submissions by commenting "accept" or "reject" under a submission.
 """
             .trim(),
         "requestParams": {
