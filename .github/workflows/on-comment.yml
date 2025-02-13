@@ -56,7 +56,7 @@ jobs:
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Close issue
-        run: gh issue close ${{ github.event.issue.number }} --reason "not planned"
+        run: gh issue close ${{ github.event.issue.number }} --reason "Not planned"
         env:
           GH_TOKEN: ${{ steps.generate_token.outputs.BOT_TOKEN }}
 
@@ -101,7 +101,7 @@ jobs:
           echo "artist_name=$(jq -r .artist result.json)" >> $GITHUB_OUTPUT
 
           cat > body.md << EOF
-          Added $(jq -r .name result.json) to Auto Nong ✨
+          Added $(jq -r .name result.json) to NONG Index ✨
           EOF
 
       - name: Make changes
