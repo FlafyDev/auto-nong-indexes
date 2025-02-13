@@ -1,4 +1,4 @@
-name: Compress JSON Files
+name: Compress JSON files
 
 on:
   workflow_dispatch:
