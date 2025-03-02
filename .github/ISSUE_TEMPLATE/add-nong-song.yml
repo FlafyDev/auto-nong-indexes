@@ -1,7 +1,9 @@
-name: Add Nong Song
-description: Add a Nong song to Auto Nong.
-title: "Add Nong Song: "
-labels: ["nong-addition", "official-addition"]
+name: Add NONG Song
+description: Add a NONG song to NONG index.
+title: "Add NONG Song: "
+labels:
+  - "nong-addition"
+  - "official-addition"
 body:
   - type: input
     id: song-name
@@ -25,7 +27,7 @@ body:
       label: Source
       description: Where should the song be sourced from?
       options:
-        - Youtube
+        - YouTube
         - Direct file download
       default: 0
     validations:
@@ -33,20 +35,20 @@ body:
   - type: input
     id: youtube-link
     attributes:
-      label: Youtube Link
-      description: If you chose Youtube, what is the URL of the video?
+      label: YouTube Link
+      description: If you chose YouTube, what is the URL of the video?
       placeholder: Ex. https://www.youtube.com/watch?v=VZXeoUPPFOY
   - type: input
     id: direct-link
     attributes:
       label: Direct File Link
-      description: If you chose Direct file download, what is the URL of the file? Must be a link to a proper CDN, Not Google Drive, Dropbox or MediaFire.
+      description: If you chose Direct file download, what is the URL of the file? Must be a link to a proper CDN, not Google Drive, Dropbox, or MediaFire.
       placeholder: Ex. https://www.example.com/song.mp3
   - type: input
     id: song-id
     attributes:
       label: Song ID
-      description: 'Which song ID should the Nong song replace in Geometry Dash? '
+      description: Which song ID should the NONG song replace in Geometry Dash?
       placeholder: Ex. 945695
     validations:
       required: true
@@ -68,5 +70,4 @@ body:
       required: false
   - type: markdown
     attributes:
-      value: Thanks for contributing songs!
-
+      value: "Thanks for contributing to the NONG index!"

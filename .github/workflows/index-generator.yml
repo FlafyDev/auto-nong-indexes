@@ -1,26 +1,24 @@
 name: Update SFH Index
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 * * * *'
-  workflow_dispatch:
 
 jobs:
   dart-generator-job:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout branch v2
-        uses: actions/checkout@v3
+      - name: Checkout repository (v2 branch)
+        uses: actions/checkout@v4
         with:
           ref: v2
 
-      - name: Set up Dart
+      - name: Setup Dart
         uses: dart-lang/setup-dart@v1
-        with:
-          sdk: 3.5.3
 
-      - name: Run the Dart generator
+      - name: Run the Dart Generator
         run: |
           git fetch origin main --depth 1
           git checkout origin/main -- generator
@@ -35,5 +33,5 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git restore --staged .
           git add sfh-index.min.json
-          git diff-index --quiet HEAD || git commit -m "chore: update SFH index"
+          git diff-index --quiet HEAD || git commit -m "chore: Update SFH index"
           git push origin v2
