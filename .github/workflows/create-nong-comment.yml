@@ -63,7 +63,7 @@ jobs:
               comment_id: ${{ steps.find-comment.outputs.comment-id }}
             })
 
-      - name: Create or update comment
+      - name: Create comment
         uses: peter-evans/create-or-update-comment@v4
         with:
           issue-number: ${{ github.event.issue.number }}
