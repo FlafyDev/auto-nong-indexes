@@ -88,7 +88,7 @@ Only Auto Nong Moderators and Beginner Moderators can accept or reject submissio
 }
 
 Future<Map<String, Object?>> genSFHIndex() async {
-  final res = await http.get(Uri.parse('https://api.songfilehub.com/songs'));
+  final res = await http.get(Uri.parse('https://api.songfilehub.com/v2/songs'));
   final obj =
       (json.decode(res.body) as List<dynamic>).cast<Map<String, dynamic>>();
 
@@ -143,6 +143,12 @@ Future<Map<String, Object?>> genSFHIndex() async {
       artistName = "";
     }
 
+    final state = entry["state"];
+
+    final levelIDs = ((entry["levelID"] ?? []) as List).map((e) => int.tryParse(e)).whereType<int>().toList();
+    final verifiedLevelIDs =
+        state == "unrated" || state == "rated" ? levelIDs : <int>[];
+
     return {
       ...acc,
       id: {
@@ -151,6 +157,7 @@ Future<Map<String, Object?>> genSFHIndex() async {
         "startOffset": 0,
         "url": url,
         "songs": [songID],
+        "verifiedLevelIDs": verifiedLevelIDs,
       },
     };
   });
