@@ -4744,5 +4744,55 @@
     "songs": [
       564162
     ]
+  },
+  {
+    "name": "Hi Ren",
+    "artist": "Ren",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "mnbXfRACsVM",
+    "songs": [
+      1000001
+    ]
+  },
+  {
+    "name": "Oyasumi",
+    "artist": "Bo en",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "OkMLYNWP-yo",
+    "songs": [
+      1000002
+    ]
+  },
+  {
+    "name": "Hej, sokoły!",
+    "artist": "Traditional (Polish/Ukrainian folk)",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "ZzZ1qmXZBuY",
+    "songs": [
+      1000003
+    ]
+  },
+  {
+    "name": "Help Me",
+    "artist": "Or3o",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "yN5Y6qWQ_TE",
+    "songs": [
+      1000004
+    ]
+  },
+  {
+    "name": "Copacabana (At the Copa)",
+    "artist": "Barry Manilow",
+    "source": "youtube",
+    "startOffset": 0,
+    "yt-id": "f_-_9GGl0_I",
+    "songs": [
+      1000005
+    ]
   }
 ]
