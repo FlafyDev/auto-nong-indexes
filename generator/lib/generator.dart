@@ -147,7 +147,7 @@ Future<Map<String, Object?>> genSFHIndex() async {
 
     final levelIDs = ((entry["levelID"] ?? []) as List).map((e) => int.tryParse(e)).whereType<int>().toList();
     final verifiedLevelIDs =
-        state == "unrated" || state == "rated" ? levelIDs : <int>[];
+        state == "unrated" || state == "rated" || state == "challenge" ? levelIDs : <int>[];
 
     return {
       ...acc,
@@ -175,12 +175,8 @@ Future<Map<String, Object?>> genSFHIndex() async {
       "submit": {
         "supportedSongTypes": ["local", "youtube", "hosted"],
         "preSubmitMessage": """
-To submit your own song/s, please use the Song File Hub Discord Bot with the /Submit command to be reviewed by Helpers.
-Please read the rules and walkthroughs for the commands before submitting!
-
-Only mp3/ogg files are supported.
-
-Disclaimer: It may take a bit to show on Jukebox's song list after being accepted. 
+To submit your own song/s, please use the Song File Hub website's "submit" tab and fill out the form to be reviewed by staff.
+Please join the Song File Hub discord server and read the #how-to-submit channel for more details and the #rules-and-info channel for submission guidelines before submitting!
 """
             .trim(),
         "requestParams": {
