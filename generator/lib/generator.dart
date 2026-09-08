@@ -119,6 +119,21 @@ Future<Map<String, Object?>> genSFHIndex() async {
       "deadlocked" => -20,
       "fingerdash" => -21,
       "dash" => -22,
+      "explorers" => -23,
+      "the7seas" => -24,
+      "thesevenseas" => -24,
+      "vikingarena" => -25,
+      "airbornerobots" => -26,
+      "djrubrub" => -26,
+      "payload" => -27,
+      "beastmode" => -28,
+      "machina" => -29,
+      "years" => -30,
+      "frontlines" => -31,
+      "spacepirates" => -32,
+      "striker" => -33,
+      "embers" => -34,
+      "round1" => 
       _ => null,
     };
 
