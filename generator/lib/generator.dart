@@ -132,6 +132,7 @@ Future<Map<String, Object?>> genSFHIndex() async {
       "machina" => -30,
       "years" => -31,
       "frontlines" => -32,
+      "electrofrontlines" => -32,
       "spacepirates" => -33,
       "striker" => -34,
       "embers" => -35,
@@ -139,7 +140,7 @@ Future<Map<String, Object?>> genSFHIndex() async {
       "monsterdanceoff" => -37,
       "pressstart" => -38,
       "nockem" => -39,
-      "knockmeout" => -39,
+      "knockemout" => -39,
       "powertrip" => -40,
       _ => null,
     };
