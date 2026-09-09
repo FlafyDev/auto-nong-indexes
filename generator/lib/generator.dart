@@ -140,7 +140,7 @@ Future<Map<String, Object?>> genSFHIndex() async {
       "pressstart" => -38,
       "nockem" => -39,
       "knockmeout" => -39,
-      "powertrip" => -40
+      "powertrip" => -40,
       _ => null,
     };
 
